@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  驗證郵件已發送 - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-5">
+            <i class="bi bi-envelope-check display-1 text-primary mb-4"></i>
+            <h2 class="mb-4">驗證郵件已發送</h2>
+            <p class="mb-4">
+              我們已經發送了一封驗證郵件到您的信箱：<br />
+              <strong class="text-primary">{{ email }}</strong>
+            </p>
+            <div class="alert alert-info" role="alert">
+              <i class="bi bi-info-circle me-2"></i>
+              請檢查您的收件匣和垃圾郵件匣，並點擊郵件中的驗證連結來啟用您的帳戶。
+            </div>
+            <div class="mt-4">
+              <a href="{% url 'login' %}" class="btn btn-primary"><i class="bi bi-box-arrow-in-right me-2"></i>返回登入頁面</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

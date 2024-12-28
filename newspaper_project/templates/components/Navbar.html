@@ -40,6 +40,9 @@
             <a class="dropdown-item" href="#">修改個人資料</a>
           </li>
           <li>
+            <a class="dropdown-item" href="{% url 'password_change' %}"><i class="bi bi-key me-2"></i>重設密碼</a>
+          </li>
+          <li>
             <hr class="dropdown-divider" />
           </li>
           <li>
@@ -61,21 +64,20 @@
 <!-- SweetAlert 的 JavaScript 代碼 -->
 <script>
   document.getElementById('logout-btn').addEventListener('click', function (event) {
-    event.preventDefault() // 阻止表單的默認提交行為
+    event.preventDefault()
   
-    // 使用 SweetAlert 彈出確認登出的提示框
     Swal.fire({
       title: '您確定要登出嗎？',
       text: '登出後，您將無法恢復登入狀態。',
-      icon: 'warning', // 顯示警告圖標
-      showCancelButton: true, // 顯示取消按鈕
-      confirmButtonText: '確認登出', // 確認按鈕的文本
-      cancelButtonText: '取消', // 取消按鈕的文本
-      reverseButtons: true // 反轉按鈕位置，讓取消按鈕放在右邊
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: '確認登出',
+      cancelButtonText: '取消',
+      reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        // 如果用戶點擊了確認登出，則進行登出操作
-        window.location.href = "{% url 'login' %}" // 頁面跳轉至登出URL
+        // 修改這裡：找到最近的 form 元素並提交
+        this.closest('form').submit()
       }
     })
   })

@@ -64,6 +64,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "src.wsgi.application"
+
+# 驗證相關設定
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = '/users/login/'
 
