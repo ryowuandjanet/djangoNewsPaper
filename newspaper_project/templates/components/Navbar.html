@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar scroll</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Link</a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="#">Action</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Another action</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Link</a>
+        </li>
+      </ul>
+
+      <!-- 顯示登入者名稱並提供登出選項 -->
+      <div class="dropdown me-3">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">{{ user.username }}</button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <li>
+            <a class="dropdown-item" href="#">修改個人資料</a>
+          </li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          <li>
+            <!-- 改為只顯示一個登出按鈕 -->
+            <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="dropdown-item" id="logout-btn">登出</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- 引入 SweetAlert 的 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- SweetAlert 的 JavaScript 代碼 -->
+<script>
+  document.getElementById('logout-btn').addEventListener('click', function (event) {
+    event.preventDefault() // 阻止表單的默認提交行為
+  
+    // 使用 SweetAlert 彈出確認登出的提示框
+    Swal.fire({
+      title: '您確定要登出嗎？',
+      text: '登出後，您將無法恢復登入狀態。',
+      icon: 'warning', // 顯示警告圖標
+      showCancelButton: true, // 顯示取消按鈕
+      confirmButtonText: '確認登出', // 確認按鈕的文本
+      cancelButtonText: '取消', // 取消按鈕的文本
+      reverseButtons: true // 反轉按鈕位置，讓取消按鈕放在右邊
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // 如果用戶點擊了確認登出，則進行登出操作
+        window.location.href = "{% url 'login' %}" // 頁面跳轉至登出URL
+      }
+    })
+  })
+</script>
