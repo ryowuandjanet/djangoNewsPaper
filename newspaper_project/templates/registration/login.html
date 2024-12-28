@@ -40,7 +40,7 @@
               </div>
               <div class="input-group">
                 <input type="password" name="password" class="form-control {% if form.password.errors %}is-invalid{% endif %}" id="id_password" placeholder="請輸入密碼" required />
-                <span class="input-group-text" style="cursor: pointer;" onclick="togglePassword()"><i class="bi bi-eye"></i></span>
+                <span class="input-group-text" style="cursor: pointer;"><i class="bi bi-eye"></i></span>
                 {% if form.password.errors %}
                   <div class="invalid-feedback">{{ form.password.errors|join:', ' }}</div>
                 {% endif %}
@@ -68,6 +68,7 @@
 
 {% block extra_js %}
   <script>
+    // 將函數定義移到外面，不要放在 DOMContentLoaded 事件裡面
     function togglePassword() {
       const passwordInput = document.getElementById('id_password')
       const toggleIcon = passwordInput.nextElementSibling.querySelector('i')
@@ -82,6 +83,14 @@
         toggleIcon.classList.add('bi-eye')
       }
     }
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      // 為眼睛圖標添加點擊事件
+      const toggleButton = document.querySelector('.input-group-text')
+      if (toggleButton) {
+        toggleButton.addEventListener('click', togglePassword)
+      }
+    })
   </script>
 
   <style>

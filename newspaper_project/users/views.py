@@ -11,7 +11,7 @@ from .forms import CustomUserCreationForm
 from .models import EmailVerification
 
 class CustomLogoutView(LogoutView):
-	next_page = 'home'
+	next_page = 'login'
 	
 	def dispatch(self, request, *args, **kwargs):
 		messages.success(request, "您已成功登出。")
